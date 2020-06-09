@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const game_route = require('./routes/game.route');
 
+app.set('view engine', 'ejs');
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /* Routes */
-app.use('/game', game_route);
+app.use('/', game_route);
 
 // Listen to server
 app.listen(3000, function () {

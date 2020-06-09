@@ -10,7 +10,7 @@ let PersonnageSchema = new Schema({
     vigueur: { type: Number, required: true },
     force: { type: Number, required: true },
     defense: { type: Number, required: true },
-    id_class: { type: Number, required: true }
+    name_class: { type: Number, required: true }
 });
 
 

@@ -8,6 +8,7 @@ app.set('view engine', 'ejs');
 // Set up mongoose connection
 const mongoose = require('mongoose');
 let mongoDB = "mongodb+srv://benten:benten@cluster0-mzln8.mongodb.net/fighting-game?retryWrites=true&w=majority";
+
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;

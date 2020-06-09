@@ -1,41 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://benten:benten@cluster0-mzln8.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const game_route = require('./routes/game.route');
 
 
-
-client.connect(/* ... */)
-    .then(client => {
-        // ...
-        const db = client.db('fighting-game')
-        const personnagesCollection = db.collection('personnages')
-
-        app.post('/heroes', (req, res) => {
-            personnagesCollection.insertOne(req.body)
-                .then(result => {
-                    console.log(result)
-                })
-                .catch(error => console.error(error))
-        })
-
-        // ...
-    })
-
-app.use(bodyParser.urlencoded({ extended: true }))
+// Set up mongoose connection
+const mongoose = require('mongoose');
+let mongoDB = "mongodb+srv://benten:benten@cluster0-mzln8.mongodb.net/fighting-game?retryWrites=true&w=majority";
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-})
+/* Routes */
+app.use('/game', game_route);
 
-app.post('/heroes', (req, res) => {
-    console.log(req.body)
-})
-
+// Listen to server
 app.listen(3000, function () {
     console.log('listening on 3000')
 })

@@ -7,7 +7,7 @@ app.set('view engine', 'ejs');
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
-let mongoDB = "mongodb+srv://benten:benten@cluster0-mzln8.mongodb.net/fighting-game?retryWrites=true&w=majority";
+let mongoDB = 'mongodb+srv://benten:benten@cluster0-mzln8.mongodb.net/fighting-game?retryWrites=true&w=majority';
 
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
@@ -17,6 +17,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static('public'))
+
 
 
 app.use(express.json())

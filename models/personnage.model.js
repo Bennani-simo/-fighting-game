@@ -10,9 +10,12 @@ let PersonnageSchema = new Schema({
     vigueur: { type: Number, required: true },
     force: { type: Number, required: true },
     defense: { type: Number, required: true },
-    name_class: { type: String, required: true }
+    name_class: { type: String, required: true },
+    image: { type: String, required: true }
+
 });
 
 
 // Export the model
 module.exports = mongoose.model('Personnage', PersonnageSchema);
+

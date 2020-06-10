@@ -3,11 +3,12 @@
 
 <div class="block">
     <center>
-        <h1 class="title">[<%= name %>] Le combat a commencé</h1> <br />
+        <h1 class="title"> Le combat contre <%= monstre.name %> à commencé</h1> <br />
     </center>
 </div>
-<center><label for="text"> Experience</label></center>
-<progress class="progress" value="90" max="100"> Point de vie </progress>
+<center><label for="text"> Experience = <%= personnage.xp %> </label></center>
+<progress class="progress" value="<%= personnage.xpPercent %>" max="100" style="color:white;">Experience
+</progress>
 
 <!-- Description -->
 <div class="block">
@@ -15,20 +16,23 @@
         <div class="columns">
             <div class="column">
                 <div class="block">
-                    <center><label for="text"> Points de vie</label></center>
-                    <progress class="progress is-danger" value="90" max="100"> Point de vie </progress>
-                    <center><label for="text"> Points de mana</label></center>
-                    <progress class="progress is-small is-success" value="20" max="100"> Point de mana </progress>
-                    <center><label for="text"> Points de vigueure</label></center>
-                    <progress class="progress is-small is-warning" value="20" max="100"> Point de vigeur
+                    <center><label for="text"> Points de vie = <%= personnage.vie %></label></center>
+                    <progress class="progress is-danger" value="<%= personnage.vie %>" max="1000"> Point de vie
+                    </progress>
+                    <center><label for="text"> Points de mana = <%= personnage.mana %></label></center>
+                    <progress class="progress is-small is-success" value="<%= personnage.mana %>" max="100"> Point de
+                        mana </progress>
+                    <center><label for="text"> Points de vigueure = <%= personnage.vigueur %></label></center>
+                    <progress class="progress is-small is-warning" value="<%= personnage.vigueur %>" max="100"> Point de
+                        vigeur
                     </progress>
                 </div>
             </div>
 
             <div class="column">
                 <div class="block">
-                    <center><label for="text"> Points de vie</label></center>
-                    <progress class="progress is-danger" value="90" max="100"> Point de vie </progress>
+                    <center><label for="text"> vie = <%= monstre.vie %>/1000</label></center>
+                    <progress class="progress is-danger" value="<%= monstre.vie %>" max="1000"> Point de vie </progress>
                 </div>
 
             </div>
@@ -46,17 +50,17 @@
         <div class="columns">
             <div class="column">
                 <center>
-                    <h1 class="title"> hero </h1>
+                    <h1 class="title"><%= personnage.pseudo %> </h1>
                     <figure class="image is-128x128">
-                        <img src="https://bulma.io/images/placeholders/256x256.png">
+                        <img src="<%= personnage.image %>">
                     </figure>
                 </center>
             </div>
             <div class="column">
                 <center>
-                    <h1 class="title"> Monster </h1>
+                    <h1 class="title"> <%= monstre.name %> </h1>
                     <figure class="image is-128x128">
-                        <img src="https://bulma.io/images/placeholders/256x256.png">
+                        <img src="<%= monstre.image %>">
                     </figure>
                 </center>
             </div>

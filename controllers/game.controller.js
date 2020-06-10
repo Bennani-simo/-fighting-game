@@ -1,18 +1,19 @@
 const Personnage = require('../models/personnage.model'),
-    Classe = require('../models/classe.model');
-
-
+    Classe = require('../models/classe.model'),
+    Monstre = require('../models/monstre.model');
 
 exports.main = async function (req, res) {
     const classes = await getClasses()
     res.render('main', { name: 'Accueil', classes: classes });
 };
+
 exports.main2 = async function (req, res) {
     const classes = await getClasses()
     const currentPersonnage = await Personnage.findById(req.query.userId);
+    const monstres = await getMonstres()
 
-    res.render('main2', { name: 'Monstre', classes: classes, personnage: currentPersonnage  });
-    
+
+    res.render('main2', { name: 'Monstre', classes: classes, personnage: currentPersonnage, monstres: monstres  });
 };
 
 
@@ -32,6 +33,15 @@ exports.recup_classes = async (req, res) => {
     try{
         const classes = await Classe.find()
         res.json(classes)
+    }catch(err){
+        res.send('Error ' + err)
+    }
+}
+
+exports.recup_monstres = async (req, res) => {
+    try{
+        const monstres = await Monstre.find()
+        res.json(monstres)
     }catch(err){
         res.send('Error ' + err)
     }
@@ -97,6 +107,17 @@ async function getClasses(){
     return classes;
 }
 
+async function getMonstres(){
+    let monstres
+    try{
+        monstre = await Monstres.find()
+    }catch(err){
+        console.error('Error ' + err)
+        return [];
+    
+    }
+    return monstres;
+}
 
 
 /* exports.create_new_personnage = function (req, res) {

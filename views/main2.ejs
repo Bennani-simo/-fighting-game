@@ -22,6 +22,7 @@
             <div class="columns">
                 <div class="column">
                     <div class="card">
+                        <% for( let index = 0; index < monstres.length; index++ ) { %>
                         <div class="card-image">
                             <figure class="image is-3by1">
                                 <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -30,7 +31,8 @@
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
-                                    <p class="title is-4 center">Monster 1</p>
+                                    <p class="title is-4 center" value="<%= monstres[index].name %>">
+                                        <%= monstres[index].name %></p>
                                 </div>
                             </div>
 
@@ -40,103 +42,85 @@
                                 <br>
                             </div>
                         </div>
+                        <% } %>
                     </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-3by1">
-                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4 center">Monster 1</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris.
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-3by1">
-                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4 center">Monster 1</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Phasellus nec iaculis mauris.
-                                <br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Description -->
-    <div class="block">
-        <div class="container">
-            <div class="columns">
-                <div class="column">
-                    <button class="button is-link is-hovered">Attaquer</button>
-
-                </div>
-                <div class="column">
-                    <button class="button is-link is-hovered">Attaquer</button>
-
-                </div>
-                <div class="column">
                     <button class="button is-link is-hovered ">Attaquer</button>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by1">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4 center">Monster 1</p>
+                                </div>
+                            </div>
 
+                            <div class="content">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Phasellus nec iaculis mauris.
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button is-link is-hovered ">Attaquer</button>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by1">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4 center">Monster 1</p>
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Phasellus nec iaculis mauris.
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button is-link is-hovered ">Attaquer</button>
                 </div>
             </div>
 
         </div>
     </div>
+
 
 
     <!-- hero -->
     <div class="block">
         <div class="container">
-            <div class="columns">
-                <div class="column">
-                    <span> pseudo = <%= personnage.pseudo %> </span> </br>
-                    <span> lvl =<%= personnage.lvl %> </span> </br>
-                    <span> experience =<%= personnage.xp %> </span> </br>
-                    <span> point de vie = <%= personnage.vie %> </span> </br>
-                    <span> point de mana = <%= personnage.mana %> </span> </br>
-                    <span> point de vigueur = <%= personnage.vigueur %> </span> </br>
-                    <span> point de force = <%= personnage.force %> </span> </br>
-                    <span> point de defense = <%= personnage.defense %> </span> </br>
+            <span> pseudo = <%= personnage.pseudo %> </span> </br>
+            <span> lvl =<%= personnage.lvl %> </span> </br>
+            <span> experience =<%= personnage.xp %> </span> </br>
+            <span> point de vie = <%= personnage.vie %> </span> </br>
+            <span> point de mana = <%= personnage.mana %> </span> </br>
+            <span> point de vigueur = <%= personnage.vigueur %> </span> </br>
+            <span> point de force = <%= personnage.force %> </span> </br>
+            <span> point de defense = <%= personnage.defense %> </span> </br>
 
 
-
-                </div>
-                <div class="column">
-                    <center><label for="text"> Experience</label></center>
-                    <progress class="progress" value="90" max="100"> Point de vie </progress>
-                </div>
-            </div>
 
         </div>
+
+        <center><label for="text"> Experience</label></center>
+        <progress class="progress" value="90" max="100"> Point de vie </progress>
+    </div>
+    </div>
+
+    </div>
     </div>
 
 

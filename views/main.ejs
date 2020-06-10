@@ -34,9 +34,9 @@
                     </center>
                     <div class="block">
                         <div class="field">
-                            <label class="label">Psoeudo</label>
+                            <label class="label">Pseudo</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Psoeudo">
+                                <input class="input" type="text" placeholder="Pseudo">
                             </div>
                         </div>
 
@@ -45,9 +45,9 @@
                             <div class="select">
 
                                 <select>
-                                    <option>Mage</option>
-                                    <option>Archer</option>
-                                    <option>Guerrier</option>
+                                    <% for( let index = 0; index < classes.length; index++ ) { %>
+                                    <option value="<%= classes[index].name %> "> <%= classes[index].name %> </option>
+                                    <% } %>
                                 </select>
                             </div>
                         </div>

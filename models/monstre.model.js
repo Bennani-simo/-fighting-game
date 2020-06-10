@@ -7,7 +7,8 @@ let MonstreSchema = new Schema({
     vie: { type: Number, required: true },
     force: { type: Number, required: true },
     defense: { type: Number, required: true },
-    xp: { type: String, required: true }
+    xp: { type: String, required: true },
+    image: { type: String, required: true },
 });
 
 

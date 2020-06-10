@@ -1,0 +1,73 @@
+<!-- Titre -->
+<div class="block">
+    <center>
+        <h1 class="title"> Attaquer l'un des <%=  monstres.length %> monstre</h1>
+
+    </center>
+    <div class="column">
+        <span> pseudo = <%= personnage.pseudo %> </span> </br>
+        <span> lvl =<%= personnage.lvl %> </span> </br>
+        <span> classe =<%= personnage.name_class %> </span> </br>
+        <center>Expériences </center>
+        <progress class="progress" value="<%= personnage.xpPercent %>" max="100" style="color:white;">Experience
+        </progress>
+    </div>
+</div>
+
+<!-- Les monste -->
+<div class="block">
+    <div class="container">
+        <div class="columns">
+            <% for( let index = 0; index < monstres.length; index++ ) { %>
+            <div class="column is-4">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-5by4">
+                            <img src=" <%= monstres[index].image %>" alt="Placeholder image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4 center" value="<%= monstres[index].name %>">
+                                    <%= monstres[index].name %></p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Phasellus nec iaculis mauris.
+                            <br>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a data-perso="<%= personnage.pseudo %>" data-monstre="<%= monstres[index].name %>"
+                            href="javascript:void(0)"
+                            class="card-footer-item button is-link is-hovered attaque_monstre">Attaquer</a>
+                    </footer>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- hero -->
+<div class="block">
+    <div class="container">
+        <span> pseudo = <%= personnage.pseudo %> </span> </br>
+        <span> lvl =<%= personnage.lvl %> </span> </br>
+        <span> experience =<%= personnage.xp %> </span> </br>
+        <span> point de vie = <%= personnage.vie %> </span> </br>
+        <span> point de mana = <%= personnage.mana %> </span> </br>
+        <span> point de vigueur = <%= personnage.vigueur %> </span> </br>
+        <span> point de force = <%= personnage.force %> </span> </br>
+        <span> point de defense = <%= personnage.defense %> </span> </br>
+    </div>
+</div>
+</div>
+
+</div>
+</div>

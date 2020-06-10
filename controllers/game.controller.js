@@ -2,6 +2,11 @@ const Personnage = require('../models/personnage.model'),
     Classe = require('../models/classe.model'),
     Monstre = require('../models/monstre.model');
 
+exports.main = async function (req, res) {
+    const classes = await get_classes()
+    res.render('main', { name: 'Accueil', classes: classes });
+};
+
 /* Personnages methodes */
 async function savePersonnage(personnageToSave) {
     let personnage
@@ -12,6 +17,10 @@ async function savePersonnage(personnageToSave) {
         console.error(err)
         return false;
     }
+}
+exports.get_personnage_by_pseudo = async (pseudo) => {
+    const personnage = await Personnage.findOne({ 'pseudo': pseudo })
+    return personnage;
 }
 
 /* Classes methodes */
@@ -39,46 +48,16 @@ async function get_classes_by_name(name) {
     return classe;
 }
 
-exports.main = async function (req, res) {
-    const classes = await get_classes()
-    res.render('main', { name: 'Accueil', classes: classes });
-};
-
-exports.main2 = async function (req, res) {
-    const classes = await get_classes()
-    const currentPersonnage = await Personnage.findById(req.query.userId);
-    const monstres = await getMonstres()
-
-
-    res.render('main2', { name: 'Monstre', classes: classes, personnage: currentPersonnage, monstres: monstres });
-};
-
-exports.recup_personnage = async (req, res) => {
-    try {
-        const personnage = await Personnage.find()
-        res.json(personnage)
-    } catch (err) {
-        res.send('Error' + err)
-    }
+/* Monstre methodes */
+exports.get_monstres = async () => {
+    const monstres = await Monstre.find()
+    return monstres;
+}
+exports.get_monstre_by_name = async (name) => {
+    const monstre = await Monstre.findOne({ 'name': name })
+    return monstre;
 }
 
-exports.recup_classes = async (req, res) => {
-    try {
-        const classes = await Classe.find()
-        res.json(classes)
-    } catch (err) {
-        res.send('Error ' + err)
-    }
-}
-
-exports.recup_monstres = async (req, res) => {
-    try {
-        const monstres = await Monstre.find()
-        res.json(monstres)
-    } catch (err) {
-        res.send('Error ' + err)
-    }
-}
 
 exports.create_new_personnage = async (personnageData) => {
     let pseudoExist = await Personnage.findOne({ "pseudo": personnageData.pseudo })
@@ -89,7 +68,7 @@ exports.create_new_personnage = async (personnageData) => {
         let personnageToSave = new Personnage({
             pseudo: personnageData.pseudo,
             lvl: 1,
-            xp: 0,
+            xp: 1400,
             vie: currentClasse.vie,
             mana: currentClasse.mana,
             vigueur: currentClasse.vigueur,

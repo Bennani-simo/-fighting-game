@@ -2,7 +2,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     http = require('http').createServer(app),
-    game_route = require('./routes/game.route');
+    game_route = require('./routes/game.route'),
+    game_controller = require('./controllers/game.controller');
 
 /* Models */
 const Personnage = require('./models/personnage.model'),
@@ -43,6 +44,22 @@ io.on('connection', function (socket) {
 
     socket.on('disconnect', function () {
         console.log('a user disconected');
+    });
+
+
+    socket.on('create_personnage', async (data) => {
+        let data_return;
+        if (data.pseudo == "" || data.classe_name == "") {
+            data_return = { "success": false, "message": "Pseudo existant" };
+        } else {
+            let personnage = await game_controller.create_new_personnage(data);
+            if (personnage.success) {
+                data_return = { "success": true, "personnage": personnage.data };
+            } else {
+                data_return = { "success": false, "message": personnage.message };
+            }
+        }
+        socket.emit('go_to_main_sreen', { data: data_return });
     });
 });
 

@@ -2,160 +2,107 @@ const Personnage = require('../models/personnage.model'),
     Classe = require('../models/classe.model'),
     Monstre = require('../models/monstre.model');
 
+/* Personnages methodes */
+async function savePersonnage(personnageToSave) {
+    let personnage
+    try {
+        personnage = await personnageToSave.save()
+        return personnage;
+    } catch (err) {
+        console.error(err)
+        return false;
+    }
+}
+
+/* Classes methodes */
+async function get_classes() {
+    let classes
+    try {
+        classes = await Classe.find()
+    } catch (err) {
+        console.error(err)
+        return [];
+
+    }
+    return classes;
+}
+
+async function get_classes_by_name(name) {
+    let classe
+    try {
+        classe = await Classe.findOne({ 'name': name })
+    } catch (err) {
+        console.error(err)
+        return false;
+
+    }
+    return classe;
+}
+
 exports.main = async function (req, res) {
-    const classes = await getClasses()
+    const classes = await get_classes()
     res.render('main', { name: 'Accueil', classes: classes });
 };
 
 exports.main2 = async function (req, res) {
-    const classes = await getClasses()
+    const classes = await get_classes()
     const currentPersonnage = await Personnage.findById(req.query.userId);
     const monstres = await getMonstres()
 
 
-    res.render('main2', { name: 'Monstre', classes: classes, personnage: currentPersonnage, monstres: monstres  });
+    res.render('main2', { name: 'Monstre', classes: classes, personnage: currentPersonnage, monstres: monstres });
 };
 
-
-
-
 exports.recup_personnage = async (req, res) => {
-    try{
+    try {
         const personnage = await Personnage.find()
         res.json(personnage)
-    }catch(err){
+    } catch (err) {
         res.send('Error' + err)
     }
 }
 
-
 exports.recup_classes = async (req, res) => {
-    try{
+    try {
         const classes = await Classe.find()
         res.json(classes)
-    }catch(err){
+    } catch (err) {
         res.send('Error ' + err)
     }
 }
 
 exports.recup_monstres = async (req, res) => {
-    try{
+    try {
         const monstres = await Monstre.find()
         res.json(monstres)
-    }catch(err){
+    } catch (err) {
         res.send('Error ' + err)
     }
 }
 
+exports.create_new_personnage = async (personnageData) => {
+    let pseudoExist = await Personnage.findOne({ "pseudo": personnageData.pseudo })
 
+    if (pseudoExist == null) {
+        let currentClasse = await get_classes_by_name(personnageData.name_class);
 
+        let personnageToSave = new Personnage({
+            pseudo: personnageData.pseudo,
+            lvl: 1,
+            xp: 0,
+            vie: currentClasse.vie,
+            mana: currentClasse.mana,
+            vigueur: currentClasse.vigueur,
+            force: currentClasse.force,
+            defense: currentClasse.defense,
+            name_class: personnageData.name_class
+        })
 
-
-exports.create_new_personnage = async (req, res) => {
-    //verifier
-    if (!req.body.pseudo || !req.body.name_class){
-        res.status(400).send("Name classe or pseudo does not exist")
-        return 
-    }
-    
-    // console.log('body:' + JSON.stringify(req.body));
-
-    const classes = await getClasses();
-    // console.log('classes:' + classes );
-
-    const currentClasse = classes.find(function(val){
-        // console.log("val:" + val);
-        return val.name === req.body.name_class;
-        
-    })
-    if (!currentClasse) {
-        res.status(400).send("Name classe does not exist")
-        return 
-    }
-
-    const personnageToSave = new Personnage({
-        pseudo: req.body.pseudo,
-        lvl: 1,
-        xp: 0,
-        vie: currentClasse.vie,
-        mana: currentClasse.mana,
-        vigueur: currentClasse.vigueur,
-        force: currentClasse.force,
-        defense: currentClasse.defense,
-        name_class: req.body.name_class
-    })
-
-    try{
-        const personnage = await personnageToSave.save()
-        res.json(personnage)
-    }catch(err){
-        console.error(err)
-        res.send('Error')
+        let personnage = await savePersonnage(personnageToSave);
+        return { "success": true, "data": personnage }
+    } else {
+        return { "success": false, "message": "Pseudo existant" }
     }
 
 };
 
-async function getClasses(){
-    let classes
-    try{
-        classes = await Classe.find()
-    }catch(err){
-        console.error('Error ' + err)
-        return [];
-    
-    }
-    return classes;
-}
-
-async function getMonstres(){
-    let monstres
-    try{
-        monstre = await Monstres.find()
-    }catch(err){
-        console.error('Error ' + err)
-        return [];
-    
-    }
-    return monstres;
-}
-
-
-/* exports.create_new_personnage = function (req, res) {
-    res.render('main', { name: 'Akashdeep' }); */
-
-
-
-
-
-
-
-    /* exports.create_new_personnage = function (req, res) {
-        let name_class = req.body.name_class;
-        // vérifié si le pseudo
-        res.send({"success": false, "message": "pseudo oblogatire"});
-        Classe.find({"name": "test"}, function (err, object) {});
-        // faut récupérer les infos de la classe demandé
-        // faut affecter les info de la classe au personnage
-        // faut affecter le pseudo au personnage
-        // faut savegaurde le personnage dans la bdd
-    
-        let personnage = new Personnage(
-            {
-                pseudo: req.body.pseudo,
-                lvl: 100,
-                xp: 100,
-                vie: 200,
-                mana: 200,
-                vigueur: 200,
-                force: 200,
-                defense: 200,
-                name_class: "rzerze",
-            }
-        );
-    
-        personnage.save(function (err) {
-            if (err) {
-                return next(err);
-            }
-            res.send('Product Created successfully')
-        }) */

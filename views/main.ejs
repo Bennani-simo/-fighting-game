@@ -35,18 +35,17 @@
                     </center>
 
                     <div class="block">
-
                         <div class="field">
                             <label class="label">Pseudo</label>
                             <div class="control">
                                 <input class="input" type="text" placeholder="Pseudo" id="pseudoInput">
                             </div>
+                            <span id="create_personnage_error" class="has-text-danger" style="display: none;">Ce champ
+                                est obligatoire !</span>
                         </div>
-
                         <div class="control">
                             <label class="label">Classe</label>
                             <div class="select">
-
                                 <select id="nameClasseSelect">
                                     <% for( let index = 0; index < classes.length; index++ ) { %>
                                     <option value="<%= classes[index].name %>"> <%= classes[index].name %>
@@ -57,7 +56,7 @@
                         </div>
                         <br />
                         <div class="control">
-                            <button class="button is-primary" onclick="postPersonnage(event)">Create hero</button>
+                            <button class="button is-primary" id="create_personnage">Create hero</button>
                         </div>
                     </div>
                 </div>

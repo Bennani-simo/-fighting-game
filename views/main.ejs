@@ -39,7 +39,7 @@
                         <div class="field">
                             <label class="label">Pseudo</label>
                             <div class="control">
-                                <input class="input" type="text" placeholder="Pseudo" name="pseudo">
+                                <input class="input" type="text" placeholder="Pseudo" id="pseudoInput">
                             </div>
                         </div>
 
@@ -47,9 +47,9 @@
                             <label class="label">Classe</label>
                             <div class="select">
 
-                                <select name="name_class">
+                                <select id="nameClasseSelect">
                                     <% for( let index = 0; index < classes.length; index++ ) { %>
-                                    <option value="<%= classes[index].name %> "> <%= classes[index].name %>
+                                    <option value="<%= classes[index].name %>"> <%= classes[index].name %>
                                     </option>
                                     <% } %>
                                 </select>

@@ -5,8 +5,18 @@ const Personnage = require('../models/personnage.model'),
 
 exports.main = async function (req, res) {
     const classes = await getClasses()
-    res.render('main', { name: 'Akashdeep', classes: classes });
+    res.render('main', { name: 'Accueil', classes: classes });
 };
+exports.main2 = async function (req, res) {
+    const classes = await getClasses()
+    const currentPersonnage = await Personnage.findById(req.query.userId);
+
+    res.render('main2', { name: 'Monstre', classes: classes, personnage: currentPersonnage  });
+    
+};
+
+
+
 
 exports.recup_personnage = async (req, res) => {
     try{
@@ -32,6 +42,12 @@ exports.recup_classes = async (req, res) => {
 
 
 exports.create_new_personnage = async (req, res) => {
+    //verifier
+    if (!req.body.pseudo || !req.body.name_class){
+        res.status(400).send("Name classe or pseudo does not exist")
+        return 
+    }
+    
     // console.log('body:' + JSON.stringify(req.body));
 
     const classes = await getClasses();

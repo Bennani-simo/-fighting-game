@@ -4,17 +4,20 @@ function postPersonnage(event) {
     $.post({
         url: '/create_personnage',
         data: `{
-            "pseudo": "benten",
-            "name_class": "mage"
+            "pseudo": "${$("#pseudoInput").val()}",
+            "name_class": "${$("#nameClasseSelect").val()}"
         }`,
         cache: false,
         processData: false,
         contentType: "application/json",
         success: (data, textStatus, jqXHR) => {
-            alert("success")
+            //alert("success")
+            window.location.replace("/monstres?userId=" + data._id);
+
         },
         error: (jqXHR, textStatus, error) => {
             console.log(jqXHR, textStatus, error);
+            alert(error)
 
         }
     });

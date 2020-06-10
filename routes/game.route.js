@@ -5,10 +5,14 @@ const game_controller = require('../controllers/game.controller');
 
 
 router.get('/', game_controller.main);
+router.get('/monstres', game_controller.main2);
 
 router.post('/recup_personnage', game_controller.recup_personnage);
 
 router.get('/recup_classes', game_controller.recup_classes);
+
+
+
 
 
 
